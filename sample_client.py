@@ -13,7 +13,7 @@ async def main():
     )
 
     response = await oai_client.chat.completions.create(
-        model="Applejack",  # Use the reasoning_llm model
+        model="Applejack",  # Use a pony name with a known profile
         messages=[{"role": "user", "content": story}],
     )
 
