@@ -8,7 +8,8 @@ RUN apt install -y \
     pipx \
     adduser
 
-RUN useradd --create-home --shell /bin/bash --user-group celestia
+RUN deluser --remove-home ubuntu
+RUN useradd --create-home --shell /bin/bash --user-group --uid 1000 celestia
 RUN mkdir /host && chown celestia:celestia /host
 
 USER celestia
