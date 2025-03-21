@@ -8,7 +8,7 @@ story = requests.get("https://poneb.in/raw/y3xpbMgb").text
 
 async def main():
     oai_client = AsyncOpenAI(
-        base_url="http://0.0.0.0:8001/api/v1",
+        base_url="http://0.0.0.0:8000/api/v1",
         api_key="none",  # API key not needed for local server
     )
 

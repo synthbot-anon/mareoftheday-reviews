@@ -1,5 +1,5 @@
+import argparse
 import asyncio
-import json
 from typing import AsyncGenerator
 
 import uvicorn
@@ -127,6 +127,11 @@ class ReviewerEngine(AsyncChatEngine):
 
 
 async def main():
+    parser = argparse.ArgumentParser(description='Mare of the Day Review Server')
+    parser.add_argument('--host', default='0.0.0.0', help='Host address to bind to (default: 0.0.0.0)')
+    parser.add_argument('--port', type=int, default=8000, help='Port to listen on (default: 8000)')
+    args = parser.parse_args()
+
     app = FastAPI(title="Mare of the Day Reviews")
     app.include_router(oai.api_router)
 
@@ -134,12 +139,10 @@ async def main():
         reviewer = ReviewerEngine(llms["reasoning_llm"], profile)
         oai.add_llm_engine(reviewer, f"{profile['name']}")
 
-    config = uvicorn.Config(app, host="0.0.0.0", port=8001, log_level="info")
+    config = uvicorn.Config(app, host=args.host, port=args.port, log_level="info")
     server = uvicorn.Server(config)
     await server.serve()
 
 
 if __name__ == "__main__":
     asyncio.run(main())
-
-asyncio.run(main())
