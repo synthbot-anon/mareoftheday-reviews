@@ -1,0 +1,21 @@
+[
+  {
+    "gemini2_flash_lite": {
+      "type": "AsyncOpenRouterEngine",
+      "url": "https://openrouter.ai/api/v1",
+      "model": "google/gemini-2.0-flash-lite-preview-02-05:free",
+      "rate-limits": [
+        {"interval": 1, "max-calls": 3, "max-tokens": 240000},
+        {"interval": 60, "max-calls": 120, "max-tokens": 240000},
+        {"interval": 3600, "max-calls": 2600, "max-tokens": 4000000},
+        {"interval": 86400, "max-calls": 57600, "max-tokens": 4000000}
+      ]
+    }
+  },
+  {
+    "reasoning_llm": {
+      "type": "ReferenceEngine",
+      "reference": "gemini2_flash_lite"
+    }
+  }
+]
